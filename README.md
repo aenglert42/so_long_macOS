@@ -1,4 +1,4 @@
-# so_long_Linux
+# so_long_MacOS
 A small 2D game to learn how to work with windows, colors, events and textures. Inspired by the "42 Coding School" exercise "so_long" (October 2021).
 
 ## Table of contents
