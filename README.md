@@ -72,9 +72,6 @@ To get the impression of movement you can think of a flicker book, where you hav
 Tested on Ubuntu 20.04.3 LTS
 * gcc (```sudo apt-get install gcc```)
 * make (```sudo apt-get install make```)
-* X11 include files (```sudo apt-get install xorg```)
-* XShm extension must be present (```sudo apt-get install libxext-dev```)
-* Utility functions from BSD systems - development files (```sudo apt-get installlibbsd-dev```)
 
 ## How to launch
 ###### <p align="right">Next: [How to play](#how-to-play)&emsp;Previous: [Prerequisites](#prerequisites)&emsp;&emsp;[[Contents](#table-of-contents)]</p>
