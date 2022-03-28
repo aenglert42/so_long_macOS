@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   map_check_input.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aenglert <aenglert@student.42.fr>          +#+  +:+       +#+        */
+/*   By: coder <coder@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/10/20 15:28:36 by aenglert          #+#    #+#             */
-/*   Updated: 2021/10/21 21:28:49 by aenglert         ###   ########.fr       */
+/*   Created: 2022/02/23 13:06:23 by coder             #+#    #+#             */
+/*   Updated: 2022/02/23 22:11:44 by coder            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "map.h"
 
-static bool	static_ft_is_rectangular(char **map, int numberofcolumns)
+static bool	static_is_rectangular(char **map, int numberofcolumns)
 {
 	int	y;
 	int	len;
@@ -28,7 +28,7 @@ static bool	static_ft_is_rectangular(char **map, int numberofcolumns)
 	return (true);
 }
 
-static bool	static_ft_is_valid_file(char **map)
+static bool	static_is_valid_file(char **map)
 {
 	int	x;
 	int	y;
@@ -51,24 +51,22 @@ static bool	static_ft_is_valid_file(char **map)
 	return (true);
 }
 
-void	ft_check_map(t_data *data, int numberoflines)
+void	check_map(t_data *data, int numberoflines)
 {
 	int		i;
-	char	errorflag[ERRORS + 1];
 	int		numberofcolumns;
 
-	ft_initialize_buffer_with(errorflag, '0', ERRORS);
-	if (!static_ft_is_valid_file(data->map))
-		ft_exit_error(data, "000000001");
+	if (!static_is_valid_file(data->map))
+		exit_error(data, WRONGFILE);
 	numberofcolumns = ft_strlen(*data->map);
-	if (!static_ft_is_rectangular(data->map, numberofcolumns))
-		ft_exit_error(data, "0001");
-	ft_check_setup(data->map, errorflag, numberofcolumns, numberoflines);
+	if (!static_is_rectangular(data->map, numberofcolumns))
+		exit_error(data, SHAPE);
+	check_setup(data->map, data->errorflags, numberofcolumns, numberoflines);
 	i = 0;
-	while (errorflag[i] != '\0')
+	while (i < ERRORS)
 	{
-		if (errorflag[i] == '1')
-			ft_exit_error(data, errorflag);
+		if (data->errorflags[i] == true)
+			exit_error(data, SETUP);
 		i++;
 	}
 }

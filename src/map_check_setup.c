@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   map_check_setup.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aenglert <aenglert@student.42.fr>          +#+  +:+       +#+        */
+/*   By: coder <coder@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/10/20 15:28:40 by aenglert          #+#    #+#             */
-/*   Updated: 2021/10/21 09:10:21 by aenglert         ###   ########.fr       */
+/*   Created: 2022/02/23 15:33:20 by coder             #+#    #+#             */
+/*   Updated: 2022/02/23 22:00:40 by coder            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "map.h"
 
-static int	static_ft_count_map_element(char **map, int element)
+static int	static_count_map_element(char **map, int element)
 {
 	int	x;
 	int	y;
@@ -34,7 +34,7 @@ static int	static_ft_count_map_element(char **map, int element)
 	return (count);
 }
 
-static bool	static_ft_vertical_wall_is_complete(char **map, int column)
+static bool	static_vertical_wall_is_complete(char **map, int column)
 {
 	int	y;
 
@@ -48,7 +48,7 @@ static bool	static_ft_vertical_wall_is_complete(char **map, int column)
 	return (true);
 }
 
-static bool	static_ft_horizontal_wall_is_complete(char *line)
+static bool	static_horizontal_wall_is_complete(char *line)
 {
 	int	x;
 
@@ -62,27 +62,27 @@ static bool	static_ft_horizontal_wall_is_complete(char *line)
 	return (true);
 }
 
-static bool	static_ft_is_closed_by_walls(char **map, int columns, int lines)
+static bool	static_is_closed_by_walls(char **map, int columns, int lines)
 {
-	if (!static_ft_horizontal_wall_is_complete(map[0]))
+	if (!static_horizontal_wall_is_complete(map[0]))
 		return (false);
-	if (!static_ft_horizontal_wall_is_complete(map[lines - 1]))
+	if (!static_horizontal_wall_is_complete(map[lines - 1]))
 		return (false);
-	if (!static_ft_vertical_wall_is_complete(map, 0))
+	if (!static_vertical_wall_is_complete(map, 0))
 		return (false);
-	if (!static_ft_vertical_wall_is_complete(map, columns - 1))
+	if (!static_vertical_wall_is_complete(map, columns - 1))
 		return (false);
 	return (true);
 }
 
-void	ft_check_setup(char **map, char *errorflag, int columns, int lines)
+void	check_setup(char **map, bool *errorflags, int columns, int lines)
 {
-	if (!static_ft_is_closed_by_walls(map, columns, lines))
-		errorflag[4] = '1';
-	if (static_ft_count_map_element(map, LOOT) < 1)
-		errorflag[7] = '1';
-	if (static_ft_count_map_element(map, EXIT) < 1)
-		errorflag[6] = '1';
-	if (static_ft_count_map_element(map, START) != 1)
-		errorflag[5] = '1';
+	if (!static_is_closed_by_walls(map, columns, lines))
+		errorflags[WALLS] = true;
+	if (static_count_map_element(map, LOOT) < 1)
+		errorflags[NOLOOT] = true;
+	if (static_count_map_element(map, EXIT) < 1)
+		errorflags[NOEXIT] = true;
+	if (static_count_map_element(map, START) != 1)
+		errorflags[SPAWN] = true;
 }

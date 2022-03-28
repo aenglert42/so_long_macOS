@@ -1,19 +1,7 @@
-# **************************************************************************** #
-#                                                                              #
-#                                                         :::      ::::::::    #
-#    Makefile                                           :+:      :+:    :+:    #
-#                                                     +:+ +:+         +:+      #
-#    By: aenglert <aenglert@student.42.fr>          +#+  +:+       +#+         #
-#                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2021/07/05 16:13:22 by aenglert          #+#    #+#              #
-#    Updated: 2021/10/20 09:09:45 by aenglert         ###   ########.fr        #
-#                                                                              #
-# **************************************************************************** #
-
 NAME := libft.a
 SRC_DIR := ./src/
 OBJ_DIR := ./obj/
-HEADER_DIR := ./includes/
+HEADER_DIR := ./inc/
 SRCS :=	ft_atoi.c \
 		ft_bzero.c \
 		ft_calloc.c \
@@ -47,6 +35,7 @@ SRCS :=	ft_atoi.c \
 		ft_putstr_fd.c \
 		ft_putstrret_fd.c \
 		ft_split.c \
+		ft_strappend.c \
 		ft_strcat_l.c \
 		ft_strchr_r.c \
 		ft_strchr.c \
@@ -63,10 +52,10 @@ SRCS :=	ft_atoi.c \
 		ft_substr.c \
 		ft_tolower.c \
 		ft_toupper.c
-OBJS := $(patsubst $(SRC_DIR)%.c,$(OBJ_DIR)%.o,$(wildcard $(SRC_DIR)*.c))
+OBJS := $(patsubst %.c,$(OBJ_DIR)%.o,$(SRCS))
 HEADERS := $(HEADER_DIR)*.h
 CC := gcc
-CFLAGS := -g -Wall -Werror -Wextra -I$(HEADER_DIR)
+CFLAGS := -g -Wall -Werror -Wextra
 AR := ar
 ARFLAGS := rcs
 RED := \033[0;31m
@@ -74,6 +63,7 @@ GREEN := \033[0;32m
 YELLOW := \033[0;33m
 BLUE := \033[0;34m
 NC := \033[0m
+# MAKE += --no-print-directory
 
 all: $(NAME)
 
@@ -83,20 +73,24 @@ $(NAME): $(OBJ_DIR) $(OBJS) $(HEADERS)
 
 $(OBJ_DIR):
 	@mkdir $(OBJ_DIR)
-	@echo "$(GREEN)creating: object-files: $(NC)\c"
 
-$(OBJ_DIR)%.o: $(SRC_DIR)%.c $(HEADERS)
-	@$(CC) $(CFLAGS) -c $< -o $@
+$(OBJ_DIR)%.o: $(SRC_DIR)%.c $(HEADERS) ofilemessage
+	@$(CC) $(CFLAGS) -I$(HEADER_DIR) -c $< -o $@
 	@echo ".\c"
+
+ofilemessage:
+	@echo "compiling $(NAME)-object-files: \c"
 
 clean:
 	@rm -rf $(OBJS) *.dSYM
 	@echo "$(RED)$(NAME)-object-files deleted$(NC)"
 	@echo "$(RED)$(NAME)-dSYM-files deleted$(NC)"
 
-fclean: clean
+xclean:
 	@rm -f $(NAME)
 	@echo "$(RED)$(NAME) deleted$(NC)"
+
+fclean: clean xclean
 
 re: fclean all
 
@@ -115,5 +109,7 @@ peace:
 	@echo "      \    \`.  /"
 	@echo "       |      |"
 	@echo "       |      |\n"
+
+.INTERMEDIATE: ofilemessage
 
 .PHONY: clean fclean all re

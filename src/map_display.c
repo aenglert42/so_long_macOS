@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   map_display.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aenglert <aenglert@student.42.fr>          +#+  +:+       +#+        */
+/*   By: coder <coder@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/10/20 15:28:44 by aenglert          #+#    #+#             */
-/*   Updated: 2021/10/21 21:41:50 by aenglert         ###   ########.fr       */
+/*   Created: 2022/02/23 15:42:18 by coder             #+#    #+#             */
+/*   Updated: 2022/02/23 15:58:07 by coder            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "map.h"
 
-static void	static_ft_put_tile_to_image(t_data *data, int x, int y)
+static void	static_put_tile_to_image(t_data *data, int x, int y)
 {
 	int	i;
 
@@ -28,7 +28,7 @@ static void	static_ft_put_tile_to_image(t_data *data, int x, int y)
 		x * data->img_size, y * data->img_size);
 }
 
-static void	static_ft_create_map(t_data *data)
+static void	static_create_map(t_data *data)
 {
 	int	x;
 	int	y;
@@ -41,20 +41,20 @@ static void	static_ft_create_map(t_data *data)
 		{
 			if (data->map[y][x] == START)
 			{
-				data->p_x = x;
-				data->p_y = y;
+				data->player.x = x;
+				data->player.y = y;
 			}
 			else if (data->map[y][x] == LOOT)
 				data->loot_count += 1;
 			if (data->map[y][x] != SPACE)
-				static_ft_put_tile_to_image(data, x, y);
+				static_put_tile_to_image(data, x, y);
 			x++;
 		}
 		y++;
 	}
 }
 
-static void	static_ft_create_background(t_data *data)
+void	iterate_map(t_data *data, int tile)
 {
 	int	x;
 	int	y;
@@ -65,16 +65,20 @@ static void	static_ft_create_background(t_data *data)
 		x = 0;
 		while (data->map[y][x] != '\0')
 		{
-			ft_put_space(data, x, y);
+			put_tile(data, x, y, tile);
+			data->grid.width = x;
 			x++;
 		}
+		data->grid.height = y;
 		y++;
 	}
 }
 
-void	ft_display_map(t_data *data)
+void	display_map(t_data *data)
 {
-	static_ft_create_background(data);
-	static_ft_create_map(data);
-	ft_put_player(data);
+	iterate_map(data, SPACE_IMAGE);
+	static_create_map(data);
+	put_countbar(data);
+	put_player(data);
+	set_enemies(data);
 }
