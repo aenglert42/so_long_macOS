@@ -21,7 +21,7 @@ A small 2D game to learn how to work with windows, colors, events and textures. 
 ### Allowed functions
 open, close, read, write, printf, malloc, free, perror, strerror, exit
 
-Aditionally all functions of the [MinilibX](https://github.com/42Paris/minilibx-linux) can be used.
+Aditionally all functions of the [MinilibX](https://harm-smits.github.io/42docs/libs/minilibx/introduction.html#introduction-1) can be used. 
 
 ### Description
 The aim of the exercise is to create a small 2D game in which the player has to collect some loot on a map, before leaving it.
@@ -69,7 +69,7 @@ To get the impression of movement you can think of a flicker book, where you hav
 
 ## Prerequisites
 ###### <p align="right">Next: [How to launch](#how-to-launch)&emsp;Previous: [Approach](#approach)&emsp;&emsp;[[Contents](#table-of-contents)]</p>
-Tested on Ubuntu 20.04.3 LTS
+Tested on macOS Catalina 10.15.7
 * gcc (```sudo apt-get install gcc```)
 * make (```sudo apt-get install make```)
 
