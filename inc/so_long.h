@@ -24,9 +24,8 @@
 # define LOOT_PATH "./img/poo32x32.xpm"
 # define PLAYER_PATH "./img/fly_right32x32.xpm"
 # define PLAYER_L_PATH "./img/fly_left32x32.xpm"
-//Linux
 # define SPACE_PATH "./img/black.xpm"
-//Mac
+//mac
 //# define SPACE_PATH "./img/space.xpm"
 # define WALL_PATH "./img/wall.xpm"
 # define BLACK_PATH "./img/black.xpm"
@@ -82,7 +81,7 @@ typedef enum e_x11masks
 	ESC_KEY = 65307,
 }	t_key; */
 
-//Mac
+//mac
 typedef enum e_key
 {
 	W_KEY = 13,
