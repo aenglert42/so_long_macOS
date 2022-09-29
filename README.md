@@ -1,6 +1,8 @@
 # so_long_macOS
 A small 2D game to learn how to work with windows, colors, events and textures. Inspired by the "42 Coding School" exercise "so_long" (October 2021).
 
+![so_long](https://user-images.githubusercontent.com/80413516/155494401-f80fc365-a149-4cf7-bba0-c28b14634285.gif)
+
 ## Table of contents
 * [Introduction](#introduction)
   * [Allowed functions](#allowed-functions)
