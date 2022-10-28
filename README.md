@@ -77,12 +77,12 @@ Tested on macOS Catalina 10.15.7
 
 ## How to launch
 ###### <p align="right">Next: [How to play](#how-to-play)&emsp;Previous: [Prerequisites](#prerequisites)&emsp;&emsp;[[Contents](#table-of-contents)]</p>
-Compile the program via the Makefile by using ```$ make``` in the root directory of the repository.
+Compile the program via the Makefile by using ```make``` in the root directory of the repository.
 
 Run it by giving it the path to the map-file as argument (in this case the file "example.ber" within the directory "maps"):
 
 ```
-$ ./so_long maps/example.ber
+./so_long maps/example.ber
 ```
 
 For the required map-file format see: [Map-file](#map-file)
