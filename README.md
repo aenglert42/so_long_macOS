@@ -71,7 +71,7 @@ To get the impression of movement you can think of a flicker book, where you hav
 
 ## Prerequisites
 ###### <p align="right">Next: [How to launch](#how-to-launch)&emsp;Previous: [Approach](#approach)&emsp;&emsp;[[Contents](#table-of-contents)]</p>
-Tested on macOS Catalina 10.15.7
+Tested on macOS Catalina 10.15.7 ([link to Linux version](https://github.com/aenglert42/so_long_Linux))
 * gcc (```sudo apt-get install gcc```)
 * make (```sudo apt-get install make```)
 
